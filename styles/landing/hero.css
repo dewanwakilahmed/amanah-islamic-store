@@ -1,9 +1,3 @@
-/* ============================================================
-   AMANAH ISLAMIC STORE — Hero Section
-   hero.css · Mobile-first · Light only · Premium v0.4
-   ============================================================ */
-
-/* ── SECTION ROOT ───────────────────────────────────────────── */
 .hero {
   width: 100%;
   height: 100vh;
@@ -12,22 +6,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  /*
-     Background system — "ghost paper" philosophy:
-     Every layer must be inferred, never read. Combined they create
-     depth and provenance; individually each is almost invisible.
-
-     Stack (bottom → top):
-     1. Base — near-white with the faintest green warmth; pure white at
-        top so the gold border floats on clean paper
-     2. Girih trellis — two overlapping squares (classic Islamic 8-pointed
-        star lattice) tiled full-bleed at 96px; stroke 0.4px, SVG opacity
-        0.18 — a watermark, not a pattern
-     3. Micro dot grid — 24px cadence, r 0.8, opacity 0.12 — linen grain
-     4. Crepuscular spotlight — narrow radial from top-center, pure white
-        core; lifts the content column off the textured field
-  */
-  background-color: #f6fbf6;
+  background-color: var(--color-hero-bg);
   background-image:
     radial-gradient(
       ellipse 55% 50% at 50% -2%,
@@ -37,7 +16,13 @@
     ),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='4' cy='4' r='0.8' fill='%231b5e20' opacity='0.12'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cg fill='none' stroke='%231b5e20' stroke-width='0.4' opacity='0.18'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3C/g%3E%3C/svg%3E"),
-    linear-gradient(170deg, #ffffff 0%, #f6fbf6 45%, #edf6ed 80%, #e6f2e6 100%);
+    linear-gradient(
+      170deg,
+      #ffffff 0%,
+      var(--color-hero-bg) 45%,
+      var(--color-hero-bg-mid) 80%,
+      var(--color-hero-bg-deep) 100%
+    );
   background-repeat: repeat, repeat, repeat, no-repeat;
   background-size:
     24px 24px,
@@ -49,27 +34,20 @@
     0 0,
     0 0,
     0 0;
-
-  /* Gold top-edge line — 4px, high contrast across full width */
   border-top: 4px solid;
   border-image: linear-gradient(
       90deg,
-      #8a6510 0%,
-      #c9a227 25%,
-      #e8c84a 45%,
-      #f2d660 50%,
-      #e8c84a 55%,
-      #c9a227 75%,
-      #8a6510 100%
+      var(--color-gold-dark) 0%,
+      var(--color-brand-gold) 25%,
+      var(--color-brand-gold-light) 45%,
+      var(--color-gold-bright) 50%,
+      var(--color-brand-gold-light) 55%,
+      var(--color-brand-gold) 75%,
+      var(--color-gold-dark) 100%
     )
     1;
 }
 
-/*
-   ::before — soft edge vignette + barely-there gold diagonal watermark
-   Gold vein lines: opacity 0.08 in SVG, then masked to top-right only.
-   Vignette: darkens corners by ~10% max — enough to frame, not shadow.
-*/
 .hero::before {
   content: "";
   position: absolute;
@@ -102,12 +80,6 @@
   z-index: 0;
 }
 
-/*
-   ::after — bottom-left dot whisper + edge fade
-   Dot grid at r 1.0, no SVG opacity — opacity controlled entirely by
-   the mask gradient which peaks at 0.45 in the corner, so effective
-   dot opacity is ~4–5%. Bottom-edge green wash at 8%.
-*/
 .hero::after {
   content: "";
   position: absolute;
@@ -136,7 +108,6 @@
   z-index: 0;
 }
 
-/* ── PROMO STRIP ────────────────────────────────────────────── */
 .hero__promo-strip {
   flex-shrink: 0;
   width: 100%;
@@ -144,28 +115,27 @@
     90deg,
     #8c0c12 0%,
     #c01018 20%,
-    #e31e24 45%,
-    #e31e24 55%,
+    var(--color-brand-red) 45%,
+    var(--color-brand-red) 55%,
     #c01018 80%,
     #8c0c12 100%
   );
-  color: #ffffff;
-  font-size: 13px;
+  color: var(--color-neutral-white);
+  font-size: var(--font-size-xs);
   font-weight: 700;
   text-align: center;
   padding: 0.5rem 1rem;
   line-height: 1.4;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
   z-index: 1;
-  /* Gold bottom rule */
-  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-  /* Single-pass shimmer sweep on load — restrained, not looping */
-  animation: promo-shimmer 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s 1
-    forwards;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .hero__promo-strip::after {
@@ -193,7 +163,6 @@
   }
 }
 
-/* ── BODY ───────────────────────────────────────────────────── */
 .hero__body {
   flex: 1;
   display: flex;
@@ -210,28 +179,87 @@
   z-index: 1;
 }
 
-/* ── BADGE ──────────────────────────────────────────────────── */
+.hero__badge,
+.hero__headline,
+.hero__subtitle,
+.hero__video-wrapper,
+.hero__social-proof,
+.hero__cta {
+  opacity: 0;
+  animation: hero-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.hero__badge {
+  animation-delay: 0.15s;
+}
+.hero__headline {
+  animation-delay: 0.28s;
+}
+.hero__subtitle {
+  animation-delay: 0.38s;
+}
+.hero__video-wrapper {
+  animation-delay: 0.5s;
+}
+.hero__social-proof {
+  animation-delay: 0.62s;
+}
+.hero__cta {
+  animation-delay: 0.72s;
+}
+
+@keyframes hero-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero__badge {
   display: inline-block;
-  background: linear-gradient(135deg, #1e6b24 0%, #145214 100%);
-  color: #ffffff;
-  font-size: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-green-light) 0%,
+    var(--color-brand-green-dark) 100%
+  );
+  color: var(--color-neutral-white);
+  font-size: 11.5px;
   font-weight: 700;
-  padding: 0.32rem 1rem;
+  padding: 0.3rem 1.05rem;
   border-radius: var(--radius-full);
-  letter-spacing: 0.05em;
-  /* Layered gold border effect */
-  border: 1px solid rgba(212, 175, 55, 0.65);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border: 1px solid rgba(212, 175, 55, 0.7);
   box-shadow:
     0 0 0 3px rgba(212, 175, 55, 0.12),
     0 0 0 5px rgba(212, 175, 55, 0.05),
-    0 2px 8px rgba(20, 82, 20, 0.3);
+    0 2px 10px rgba(20, 82, 20, 0.32);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
 
-/* One-time shimmer sweep on the badge */
+.hero__badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 100%
+  );
+  border-radius: var(--radius-full) var(--radius-full) 0 0;
+  pointer-events: none;
+}
+
 .hero__badge::after {
   content: "";
   position: absolute;
@@ -239,7 +267,7 @@
   background: linear-gradient(
     105deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.2) 50%,
     transparent 70%
   );
   transform: translateX(-100%);
@@ -247,24 +275,22 @@
   pointer-events: none;
 }
 
-/* ── HEADLINE ───────────────────────────────────────────────── */
 .hero__headline {
   font-family: var(--font-family-bengali);
   font-size: clamp(21px, 5.5vw, 27px);
   font-weight: 700;
   line-height: 1.3;
-  color: #0d3810;
-  /* Deep ink shadow — like letterpress on quality paper */
+  color: var(--color-headline);
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6),
-    0 -1px 0 rgba(0, 0, 0, 0.04);
+    0 1px 0 rgba(255, 255, 255, 0.65),
+    0 -1px 0 rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(13, 56, 16, 0.08);
   margin: 0;
   flex-shrink: 0;
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.7rem;
   position: relative;
 }
 
-/* Gold underline — wider and stronger */
 .hero__headline::after {
   content: "";
   position: absolute;
@@ -276,27 +302,38 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    #c9a227 20%,
-    #e8c84a 50%,
-    #c9a227 80%,
+    var(--color-brand-gold) 20%,
+    var(--color-brand-gold-light) 50%,
+    var(--color-brand-gold) 80%,
     transparent 100%
   );
   border-radius: 2px;
 }
 
-/* ── SUBTITLE ───────────────────────────────────────────────── */
+.hero__headline::before {
+  content: "◆";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6px;
+  color: var(--color-brand-gold);
+  line-height: 1;
+  z-index: 1;
+}
+
 .hero__subtitle {
   font-family: var(--font-family-bengali);
   font-size: clamp(13px, 3.5vw, 16px);
   font-weight: 400;
-  line-height: 1.7;
-  color: #4a4a4a;
+  line-height: 1.72;
+  color: var(--color-subtitle);
+  letter-spacing: 0.01em;
   margin: 0;
   max-width: 40ch;
   flex-shrink: 0;
 }
 
-/* ── VIDEO WRAPPER ──────────────────────────────────────────── */
 .hero__video-wrapper {
   width: 100%;
   max-height: 38vh;
@@ -306,24 +343,15 @@
   background-color: #0a0a0a;
   flex-shrink: 1;
   position: relative;
-  /*
-     Upgraded shadow stack:
-     1. Tight gold ring (1px solid)
-     2. Gold halo (4px)
-     3. Outer gold breath (8px, very subtle)
-     4. Deep ambient shadow
-     5. Green brand shadow — ties to page palette
-  */
   box-shadow:
     0 0 0 1.5px rgba(212, 175, 55, 0.75),
     0 0 0 4px rgba(212, 175, 55, 0.14),
     0 0 0 8px rgba(212, 175, 55, 0.05),
     0 10px 32px rgba(0, 0, 0, 0.22),
     0 2px 8px rgba(27, 94, 32, 0.14);
-  /* Micro-lift on hover — video frame feels interactive */
   transition:
-    box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hero__video-wrapper:hover {
@@ -336,7 +364,6 @@
     0 3px 10px rgba(27, 94, 32, 0.16);
 }
 
-/* 3px green-to-gold top shimmer inside the frame */
 .hero__video-wrapper::before {
   content: "";
   position: absolute;
@@ -346,11 +373,30 @@
   height: 3px;
   background: linear-gradient(
     90deg,
-    #1b5e20 0%,
-    #c9a227 35%,
-    #e8c84a 50%,
-    #c9a227 65%,
-    #1b5e20 100%
+    var(--color-brand-green) 0%,
+    var(--color-brand-gold) 35%,
+    var(--color-brand-gold-light) 50%,
+    var(--color-brand-gold) 65%,
+    var(--color-brand-green) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero__video-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.5) 30%,
+    rgba(212, 175, 55, 0.8) 50%,
+    rgba(201, 162, 39, 0.5) 70%,
+    transparent 100%
   );
   z-index: 2;
   pointer-events: none;
@@ -363,29 +409,37 @@
   object-fit: cover;
 }
 
-/* ── SOCIAL PROOF ───────────────────────────────────────────── */
 .hero__social-proof {
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
-  color: #5a5a5a;
+  color: var(--color-social-proof);
   margin: 0;
   flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-left: 2.5px solid rgba(201, 162, 39, 0.65);
+  border-radius: var(--radius-full);
+  padding: 0.28rem 0.85rem 0.28rem 0.7rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .hero__social-proof::before {
   content: "★ ★ ★ ★ ★";
-  color: #c9a227;
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  /* Micro gold glow on the stars */
-  text-shadow: 0 0 6px rgba(201, 162, 39, 0.45);
+  color: var(--color-brand-gold);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px rgba(201, 162, 39, 0.4);
+  line-height: 1;
 }
 
-/* ── CTA ────────────────────────────────────────────────────── */
 .hero__cta {
   display: block;
   width: 100%;
@@ -393,50 +447,48 @@
   text-decoration: none;
   text-align: center;
   flex-shrink: 0;
-  /* Jewel-cut gradient — 4 stops give it a faceted, carved emerald feel */
   background: linear-gradient(
     180deg,
     #2a7d32 0%,
-    #1e6b24 30%,
+    var(--color-brand-green-light) 30%,
     #165c1c 70%,
-    #0f4214 100%
+    var(--color-brand-green-dark) 100%
   );
-  color: #ffffff;
+  color: var(--color-neutral-white);
   font-family: var(--font-family-bengali);
   font-size: clamp(14px, 3.8vw, 17px);
   font-weight: 700;
-  padding: 0.75rem 1.25rem;
+  padding: 0.78rem 1.25rem;
   border-radius: var(--radius-lg);
-  /* Stronger gold top accent */
-  border-top: 2px solid rgba(232, 200, 74, 0.85);
+  border-top: 2px solid rgba(232, 200, 74, 0.88);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
   letter-spacing: 0.025em;
-  /* Layered shadow — dimensional lift + brand ambient */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   box-shadow:
     0 4px 20px rgba(15, 66, 20, 0.45),
     0 1px 4px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
   transition:
     transform 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     box-shadow 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     filter 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
-  /* Persistent inner top highlight — dimensional at rest */
   isolation: isolate;
+  will-change: transform;
 }
 
-/* Persistent top-edge gloss — makes it look "pressed" as a physical object */
 .hero__cta::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 40%;
+  height: 42%;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.11) 0%,
     transparent 100%
   );
   pointer-events: none;
@@ -444,7 +496,6 @@
   z-index: 1;
 }
 
-/* Shine sweep — only on hover */
 .hero__cta::after {
   content: "";
   position: absolute;
@@ -452,7 +503,7 @@
   background: linear-gradient(
     108deg,
     transparent 32%,
-    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.15) 50%,
     transparent 68%
   );
   opacity: 0;
@@ -465,7 +516,8 @@
   box-shadow:
     0 8px 28px rgba(27, 94, 32, 0.48),
     0 3px 8px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
   filter: brightness(1.07);
 }
 
@@ -478,17 +530,27 @@
   box-shadow:
     0 2px 8px rgba(27, 94, 32, 0.32),
     0 1px 2px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(0, 0, 0, 0.08);
+    inset 0 2px 4px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   filter: brightness(0.95);
 }
 
 .hero__cta:focus-visible {
-  outline: 3px solid #d4af37;
+  outline: 3px solid var(--color-brand-gold);
   outline-offset: 3px;
 }
 
-/* ── REDUCED MOTION ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+  .hero__badge,
+  .hero__headline,
+  .hero__subtitle,
+  .hero__video-wrapper,
+  .hero__social-proof,
+  .hero__cta {
+    opacity: 1;
+    animation: none;
+    will-change: auto;
+  }
   .hero__promo-strip::after,
   .hero__badge::after {
     display: none;
@@ -509,13 +571,12 @@
   .hero__video-wrapper:hover {
     transform: none;
   }
-  .hero__headline::after {
+  .hero__headline::after,
+  .hero__headline::before {
     display: none;
   }
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────────── */
-/* Very short viewport — landscape phone */
 @media (max-height: 640px) {
   .hero__body {
     justify-content: space-between;
@@ -529,7 +590,6 @@
   }
 }
 
-/* Sub-360px — cheapest Android handsets */
 @media (max-width: 359px) {
   .hero__promo-strip {
     font-size: 11px;
@@ -545,20 +605,18 @@
   }
 }
 
-/* 480px and up */
 @media (min-width: 480px) {
   .hero__body {
     max-width: 440px;
   }
   .hero__promo-strip {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
   .hero__video-wrapper {
     max-height: 40vh;
   }
 }
 
-/* 768px and up — tablet */
 @media (min-width: 768px) {
   .hero__promo-strip {
     font-size: 15px;
@@ -583,12 +641,10 @@
   }
 }
 
-/* 1024px and up — desktop */
 @media (min-width: 1024px) {
   .hero__body {
     max-width: 660px;
   }
-
   .hero__headline {
     font-size: clamp(26px, 2.8vw, 36px);
   }
@@ -610,7 +666,6 @@
   }
 }
 
-/* 1280px and up — wide desktop */
 @media (min-width: 1280px) {
   .hero__body {
     max-width: 720px;
