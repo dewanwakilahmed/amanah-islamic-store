@@ -28,13 +28,13 @@ export default function StickersPackPage() {
       <ViewContentTracker />
 
       {/* STRICT SECTION ORDER — do not reorder */}
-      <main className="min-h-screen bg-white max-w-lg mx-auto">
+      <main className="min-h-screen bg-white">
         <Hero />
-        <TrustBadges />
-        <ProductFeatures />
-        <DuaListPreview />
-        <BundlePricing />
-        <OrderForm />
+        {/* <TrustBadges /> */}
+        {/* <ProductFeatures /> */}
+        {/* <DuaListPreview /> */}
+        {/* <BundlePricing /> */}
+        {/* <OrderForm /> */}
       </main>
     </>
   );
