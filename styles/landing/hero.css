@@ -1,6 +1,6 @@
 /* ============================================================
    AMANAH ISLAMIC STORE — Hero Section
-   hero.css · Mobile-first · Light only · Premium v0.2
+   hero.css · Mobile-first · Light only · Premium v0.4
    ============================================================ */
 
 /* ── SECTION ROOT ───────────────────────────────────────────── */
@@ -12,57 +12,126 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  /* Richer layered gradient — radial light source from top-center
-     creates a subtle "spotlight" without JS or extra elements      */
-  background-color: #f5faf5;
+  /*
+     Background system — "ghost paper" philosophy:
+     Every layer must be inferred, never read. Combined they create
+     depth and provenance; individually each is almost invisible.
+
+     Stack (bottom → top):
+     1. Base — near-white with the faintest green warmth; pure white at
+        top so the gold border floats on clean paper
+     2. Girih trellis — two overlapping squares (classic Islamic 8-pointed
+        star lattice) tiled full-bleed at 96px; stroke 0.4px, SVG opacity
+        0.18 — a watermark, not a pattern
+     3. Micro dot grid — 24px cadence, r 0.8, opacity 0.12 — linen grain
+     4. Crepuscular spotlight — narrow radial from top-center, pure white
+        core; lifts the content column off the textured field
+  */
+  background-color: #f6fbf6;
   background-image:
     radial-gradient(
-      ellipse 80% 40% at 50% 0%,
-      rgba(255, 255, 255, 0.9) 0%,
-      transparent 70%
+      ellipse 55% 50% at 50% -2%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.7) 35%,
+      transparent 68%
     ),
-    linear-gradient(175deg, #ffffff 0%, #f2f8f2 50%, #e8f4e8 100%);
-  /* Gold top-edge line — thicker, stronger contrast */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='4' cy='4' r='0.8' fill='%231b5e20' opacity='0.12'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cg fill='none' stroke='%231b5e20' stroke-width='0.4' opacity='0.18'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(170deg, #ffffff 0%, #f6fbf6 45%, #edf6ed 80%, #e6f2e6 100%);
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  background-size:
+    24px 24px,
+    96px 96px,
+    96px 96px,
+    100% 100%;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+
+  /* Gold top-edge line — 4px, high contrast across full width */
   border-top: 4px solid;
   border-image: linear-gradient(
       90deg,
-      #a07818 0%,
-      #e8c84a 35%,
-      #f0d060 50%,
-      #e8c84a 65%,
-      #a07818 100%
+      #8a6510 0%,
+      #c9a227 25%,
+      #e8c84a 45%,
+      #f2d660 50%,
+      #e8c84a 55%,
+      #c9a227 75%,
+      #8a6510 100%
     )
     1;
 }
 
-/* ── ISLAMIC GEOMETRIC BACKGROUND PATTERN ───────────────────── */
+/*
+   ::before — soft edge vignette + barely-there gold diagonal watermark
+   Gold vein lines: opacity 0.08 in SVG, then masked to top-right only.
+   Vignette: darkens corners by ~10% max — enough to frame, not shadow.
+*/
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 52%;
-  height: 55%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect x='15' y='15' width='30' height='30' fill='none' stroke='%231b5e20' stroke-width='0.9' transform='rotate(0 30 30)'/%3E%3Crect x='15' y='15' width='30' height='30' fill='none' stroke='%231b5e20' stroke-width='0.9' transform='rotate(45 30 30)'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%231b5e20'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 48px 48px;
-  opacity: 0.055;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cline x1='0' y1='60' x2='60' y2='0' stroke='%23c9a227' stroke-width='0.6' opacity='0.08'/%3E%3Cline x1='60' y1='120' x2='120' y2='60' stroke='%23c9a227' stroke-width='0.6' opacity='0.08'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 110% 110% at 50% 50%,
+      transparent 60%,
+      rgba(160, 195, 160, 0.08) 85%,
+      rgba(120, 170, 120, 0.13) 100%
+    );
+  background-repeat: repeat, no-repeat;
+  background-size:
+    120px 120px,
+    100% 100%;
+  -webkit-mask-image: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(0, 0, 0, 0.5) 58%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  mask-image: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(0, 0, 0, 0.5) 58%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
   pointer-events: none;
   z-index: 0;
 }
 
-/* Small dot-grid accent — bottom left corner only */
+/*
+   ::after — bottom-left dot whisper + edge fade
+   Dot grid at r 1.0, no SVG opacity — opacity controlled entirely by
+   the mask gradient which peaks at 0.45 in the corner, so effective
+   dot opacity is ~4–5%. Bottom-edge green wash at 8%.
+*/
 .hero::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 32%;
-  height: 32%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%231b5e20'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 18px 18px;
-  opacity: 0.07;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='3' cy='3' r='1' fill='%231b5e20'/%3E%3C/svg%3E"),
+    linear-gradient(0deg, rgba(180, 220, 180, 0.08) 0%, transparent 25%);
+  background-repeat: repeat, no-repeat;
+  background-size:
+    20px 20px,
+    100% 100%;
+  opacity: 0.45;
+  -webkit-mask-image: linear-gradient(
+    315deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.4) 25%,
+    transparent 45%
+  );
+  mask-image: linear-gradient(
+    315deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.4) 25%,
+    transparent 45%
+  );
   pointer-events: none;
   z-index: 0;
 }
@@ -184,7 +253,11 @@
   font-size: clamp(21px, 5.5vw, 27px);
   font-weight: 700;
   line-height: 1.3;
-  color: #0f3d12;
+  color: #0d3810;
+  /* Deep ink shadow — like letterpress on quality paper */
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    0 -1px 0 rgba(0, 0, 0, 0.04);
   margin: 0;
   flex-shrink: 0;
   padding-bottom: 0.6rem;
@@ -320,8 +393,14 @@
   text-decoration: none;
   text-align: center;
   flex-shrink: 0;
-  /* Richer 3-stop gradient — top highlight creates a "ridge" */
-  background: linear-gradient(180deg, #22752a 0%, #1a6620 50%, #135018 100%);
+  /* Jewel-cut gradient — 4 stops give it a faceted, carved emerald feel */
+  background: linear-gradient(
+    180deg,
+    #2a7d32 0%,
+    #1e6b24 30%,
+    #165c1c 70%,
+    #0f4214 100%
+  );
   color: #ffffff;
   font-family: var(--font-family-bengali);
   font-size: clamp(14px, 3.8vw, 17px);
@@ -330,11 +409,13 @@
   border-radius: var(--radius-lg);
   /* Stronger gold top accent */
   border-top: 2px solid rgba(232, 200, 74, 0.85);
-  /* Layered shadow — dimensional lift */
+  letter-spacing: 0.025em;
+  /* Layered shadow — dimensional lift + brand ambient */
   box-shadow:
-    0 4px 18px rgba(27, 94, 32, 0.42),
-    0 1px 4px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 4px 20px rgba(15, 66, 20, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   transition:
     transform 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     box-shadow 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -507,10 +588,7 @@
   .hero__body {
     max-width: 660px;
   }
-  .hero::before {
-    width: 42%;
-    height: 58%;
-  }
+
   .hero__headline {
     font-size: clamp(26px, 2.8vw, 36px);
   }
