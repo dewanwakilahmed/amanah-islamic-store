@@ -375,3 +375,55 @@ select {
     transform: translateY(0);
   }
 }
+
+@theme {
+  --color-hero-bg: #f6fbf6;
+  --color-hero-bg-mid: #edf6ed;
+  --color-hero-bg-deep: #e6f2e6;
+  --color-gold-dark: #8a6510;
+  --color-gold-bright: #f2d660;
+  --color-headline: #0d3810;
+  --color-subtitle: #4d4a46;
+  --color-social-proof: #4a4844;
+}
+
+@keyframes strip-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes hero-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rule-expand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 64px;
+  }
+}
+
+@keyframes fade-in-ornament {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
