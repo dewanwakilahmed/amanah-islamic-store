@@ -30,11 +30,11 @@ export default function StickersPackPage() {
       {/* STRICT SECTION ORDER — do not reorder */}
       <main className="min-h-screen bg-white">
         <Hero />
-        {/* <TrustBadges /> */}
-        {/* <ProductFeatures /> */}
-        {/* <DuaListPreview /> */}
-        {/* <BundlePricing /> */}
-        {/* <OrderForm /> */}
+        <TrustBadges />
+        <ProductFeatures />
+        <DuaListPreview />
+        <BundlePricing />
+        <OrderForm />
       </main>
     </>
   );
